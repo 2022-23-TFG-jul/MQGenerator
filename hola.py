@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    title = "Generador automatico de problemas"
+    title = "Control de proyectos"
     user = {'nombre': 'Alvaro'}
 
     return render_template('index.html', title=title, user=user)
