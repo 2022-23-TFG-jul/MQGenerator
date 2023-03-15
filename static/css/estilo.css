@@ -6,6 +6,8 @@
 
 body {
     background-image: url(fondoWEB.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .form-register {
