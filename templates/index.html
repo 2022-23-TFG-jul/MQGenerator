@@ -4,13 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" type ="text/css" href="{{url_for('static', filename='css/estilo.css')}}">
     <title>Control de proyectos</title>
 </head>
 <body>
     <h1>{{ title }}</h1>
-    <h3>Bienvenido a su app web</h3>
-    <p>Hola, {{ user.nombre }}!</p>
+    <nav class="menu">
+        <label for="" class="logo">EVM </label>
+        <ul class="menu-opc">
+            <li>
+                <a href="/">Inicio</a>
+            </li>
+
+            <li>
+                <a href="">Informacion general</a>
+            </li>
+
+            <li>
+                <a href="">Registro</a>
+            </li>
+        </ul>
+    </nav>
+
+    {% block content %}
+
+    {% endblock %}
     <section class="form-register">
         <h4>Registrarse</h4>
         <input class="controls" type="text" name="nombres" id="nombres" placeholder="Ingrese su nombre">
