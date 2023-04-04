@@ -1,6 +1,7 @@
 import random
 import string
 import pandas as pd
+import xml.etree.ElementTree as ET
 from termcolor import colored
 
 # Creación de pregunta 0 tipo tabla
@@ -13,7 +14,7 @@ class Tabla:
         self.tabla = []
 
         # Agrego el título de las columnas en la fila 1
-        self.tabla.append(['Tareas', 'CPTP', 'CRTR', '%Completado'])
+        self.tabla.append(['Tareas', 'CPTP', 'CRTR', 'Completado'])
 
         # Agrego los datos a la tabla
         for i in range(self.filas):
@@ -50,9 +51,13 @@ class Tabla:
             self.tabla.append(fila)
 
     def imprimir_tabla(self):
+        # Añade el enunciado de la pregunta
+        texto = "las actividades desde la A hasta la E"
+        textoFormato = colored(texto, attrs=['underline', 'bold'])
+        print("Suponga un proyecto en el que en el momento actual y de acuerdo al plan de proyecto "+ textoFormato +" deberían estar ya completadas y el resto de actividades no comenzadas.\nEl informe de seguimiento del proyecto es el siguiente: ")
         # Añade al porcentaje completado el simbolo %
         for columna in self.tabla:
-            if columna[3] != "" and columna[3] != "%Completado":                
+            if columna[3] != "" and columna[3] != "Completado":                
                 columna[3] = str(columna[3]) + "%"
 
         # Calcula el ancho máximo de cada columna
@@ -64,8 +69,8 @@ class Tabla:
             if columna[3] == "100%":
                 print(colored("| " + " | ".join(str(elem).center(anchos[i]) for i, elem in enumerate(columna)) + " |", attrs=['bold']))
             else:
-                print("| " + " | ".join(str(elem).center(anchos[i]) for i, elem in enumerate(columna)) + " |")
-               
+                print("| " + " | ".join(str(elem).center(anchos[i]) for i, elem in enumerate(columna)) + " |") 
+
     def valor_planificado(self):
         PV = 0
         for columna in self.tabla:
@@ -111,7 +116,17 @@ class Tabla:
         # Se redondea a dos decimales
         spi = round(EV / PV, 2)
         return spi
-    
+
+    def to_xml(self, nombre_archivo):
+        # Transforma la tabla en un DataFrame
+        df = pd.DataFrame(self.tabla[1:], columns=self.tabla[0])
+        # Añade el símbolo % a la columna %Completado
+        df['Completado'] = df['Completado'].apply(lambda x: str(x) + '%' if isinstance(x, int) else x)
+        # Los valores de CRTR tienen que ser enteros
+        df['CRTR'] = pd.to_numeric(df['CRTR'], errors='coerce')
+        # Guarda el DataFrame en un XML
+        df.to_xml(path_or_buffer=None, index=True, root_name='Tabla', row_name='Fila', na_rep=None, attr_cols=None, elem_cols=None, namespaces=None, prefix=None, encoding='utf-8', xml_declaration=True, pretty_print=True, parser='lxml', stylesheet=None, compression='infer', storage_options=None)
+
 # SALIDA POR PANTALLA
 tabla = Tabla()
 valor_planificado = str(tabla.valor_planificado())
@@ -119,6 +134,7 @@ coste_actual = str(tabla.coste_actual())
 valor_ganado = str(tabla.valor_ganado())
 cpi = str(tabla.CPI())
 spi = str(tabla.SPI())
+tabla.to_xml('Tabla.xml')
 tabla.imprimir_tabla()
 print("El valor planificado (PV) en el momento actual "+ valor_planificado)
 print("El coste actual (AC) en el momento actual "+ coste_actual)
