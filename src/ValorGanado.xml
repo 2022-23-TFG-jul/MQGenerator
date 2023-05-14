@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<question type="cloze">
+  <name>
+    <text>Problema Valor ganado</text>
+  </name>
+  <questiontext format="html">
+    <text><![CDATA[
+        <p>Le presentan el informe de valor ganado de un proyecto en curso (ver figura).<br></p>
+        <p><img src="ValorGanadoEjercicio.jpg" alt="" width="574" height="372" role="presentation" style="vertical-align:text-bottom; margin: 0 .5em;" class="img-responsive"><br></p>
+        <p>En vista de los datos, ¿cómo va el proyecto en costes?</p>
+        <p>{1:MULTICHOICE_V:0%Con sobrecoste#~0%Con costes de acuerdo a lo planificado#~100%Con ahorro en coste#}</p>
+        <p>¿Y en tiempo?</p>
+        <p>{1:MULTICHOICE_V:0%En adelanto#~0%De acuerdo a lo planificado en plazo#~100%En retraso#}</p>
+        <p>¿qué estimación de coste final para el proyecto haría? (en €)&nbsp;<{1:NUMERICAL:%100%4307.69:50#}</p>
+        <p>¿qué estimación de tiempo haría si utilizase el método del valor ganado? (en meses)&nbsp;{1:NUMERICAL:%100%24.92:0.5#}</p><br></p>
+        ]]></text>
+  </questiontext>
+  <generalfeedback format="html">
+    <text/>
+  </generalfeedback>
+  <penalty>0.3333333</penalty>
+  <hidden>0</hidden>
+  <idnumber/>
+</question>
