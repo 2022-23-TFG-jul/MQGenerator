@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<question type="cloze">
+  <name>
+    <text>Problema Programación ganada</text>
+  </name>
+  <questiontext format="html">
+    <text><![CDATA[
+        <p></p><p>Le presentan el informe de valor ganado de un proyecto en curso (ver figura).&nbsp;</p>
+        <p><img src="ProgramacionGanadaEjercicio.jpg" alt="" width="861" height="614" role="presentation" style="vertical-align:text-bottom; margin: 0 .5em;" class="img-responsive"><br></p>
+        <p>En vista de los datos,&nbsp;</p>
+        <p>¿cuál es el Cost Variance del proyecto? (introducir con el signo apropiado) {1:NUMERICAL:%100%20500:0#}</p>
+        <p>¿cuál es el SPI? (con dos decimales) {1:NUMERICAL:%100%1.82:0.1#}</p>
+        <p>De acuerdo a la programación ganada el proyecto va: {1:MULTICHOICE_V:0%Retrasado#~100%Adelantado#~0%De acuerdo a lo planificado#} &nbsp;¿cuánto? (introducir en meses sin signo)&nbsp;{1:NUMERICAL:%100%1.61:0#}</p><br></p>
+        ]]></text>
+  </questiontext>
+  <generalfeedback format="html">
+    <text/>
+  </generalfeedback>
+  <penalty>0.3333333</penalty>
+  <hidden>0</hidden>
+  <idnumber/>
+</question>
