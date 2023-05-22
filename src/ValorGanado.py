@@ -2,6 +2,9 @@ from lxml import etree
 import matplotlib.pyplot as plt
 import numpy as np
 import random
+import base64
+from PIL import Image
+from io import BytesIO
 
 # Creación de pregunta 2 sobre el Valor Ganado
 # Autor: Álvaro Hoyuelos Martín
@@ -48,20 +51,35 @@ def crearGrafico():
     plt.text(valorTiempoMedio + 0.5, valorAC, f'{valorAC:.2f} €', color = 'm')
     plt.axhline(y = valorFinalPV, color = 'r', linestyle = '--')
     plt.axvline(x = tiempoTotal, color = 'r', linestyle = ':')
-    plt.text(tiempoTotal + 0.5, valorFinalPV, f'{valorFinalPV:.2f} €', color = 'r')  
+    plt.text(tiempoTotal - 2, valorFinalPV, f'{valorFinalPV:.2f} €', color = 'r')     
 
     # Añadir leyenda y título a la x e y de la gráfica y guardar la gráfica como una imagen
     plt.xlabel('Tiempo (meses)')
     plt.ylabel('Coste acumulado (€)')
     plt.legend()
     plt.savefig('ValorGanadoEjercicio.jpg')
+    grafica = plt.imread('ValorGanadoEjercicio.jpg')
     
     # Creación del fichero xml y calculo de los métodos
     estadoCosteF = estadoCoste(valorEV, valorAC)
     estadoPlazoF = estadoPlazo(valorEV, valorPV)    
     costeFinalF = costeFinal(valorEV, valorAC, valorFinalPV)    
     tiempoFinalF = tiempoFinal(valorEV, valorPV, tiempoTotal)   
-    EVM_xml(estadoCosteF, estadoPlazoF, costeFinalF, tiempoFinalF)
+    codificarGraficoValorF = codificarGraficoValor(grafica)
+    EVM_xml(estadoCosteF, estadoPlazoF, costeFinalF, tiempoFinalF, codificarGraficoValorF)
+
+def codificarGraficoValor(grafica):   
+    # Convertir la imagen de un arreglo de NumPy a un objeto de imagen de PIL
+    graficaPil = Image.fromarray(np.uint8(grafica))
+
+    # Guardar el gráfico en un objeto BytesIO
+    buffered = BytesIO()
+    graficaPil.save(buffered, format="JPEG")
+    
+    # Codificar la gráfica en base64 para conseguir la linea de texto
+    grafica64 = base64.b64encode(buffered.getvalue())
+    graficaCodificada = grafica64.decode("utf-8")
+    return graficaCodificada
 
 # Métodos para calcular las preguntas del cuestionario
 def estadoCoste(valorEV, valorAC):
@@ -88,9 +106,12 @@ def tiempoFinal(valorEV, valorPV, tiempoTotal):
     spi = valorEV / valorPV
     return round(tiempoTotal / spi, 2)
 
-def EVM_xml(estadoCoste, estadoPlazo, costeFinal, tiempoFinal):  
-    # Crear el elemento raíz 'question'
-    question = etree.Element('question')
+def EVM_xml(estadoCoste, estadoPlazo, costeFinal, tiempoFinal, codificarGraficoValor):  
+    # Crear el elemento raíz 'quiz'
+    quiz = etree.Element('quiz')
+    
+    # Crear el elemento 'question'
+    question = etree.SubElement(quiz, 'question')
     question.set('type', 'cloze')
 
     # Crear el elemento 'questiontext'   
@@ -126,16 +147,23 @@ def EVM_xml(estadoCoste, estadoPlazo, costeFinal, tiempoFinal):
     text = etree.SubElement(questiontext, 'text')
     text_content = f"""
         <p>Le presentan el informe de valor ganado de un proyecto en curso (ver figura).<br></p>
-        <p><img src="ValorGanadoEjercicio.jpg" alt="" width="574" height="372" role="presentation" style="vertical-align:text-bottom; margin: 0 .5em;" class="img-responsive"><br></p>
+        <p><img src="@@PLUGINFILE@@/ValorGanadoEjercicio.jpg" alt="" width="574" height="372" role="presentation" style="vertical-align:text-bottom; margin: 0 .5em;" class="img-responsive"><br></p>
         <p>En vista de los datos, ¿cómo va el proyecto en costes?</p>
-        <p>{{1:MULTICHOICE_V:{sobrecoste}%Con sobrecoste#~{acordado}%Con costes de acuerdo a lo planificado#~{ahorro}%Con ahorro en coste#}}</p>
+        <p>{{1:MULTICHOICE_V:%{sobrecoste}%Con sobrecoste#~%{acordado}%Con costes de acuerdo a lo planificado#~%{ahorro}%Con ahorro en coste#}}</p>
         <p>¿Y en tiempo?</p>
-        <p>{{1:MULTICHOICE_V:{adelanto}%En adelanto#~{planificado}%De acuerdo a lo planificado en plazo#~{retraso}%En retraso#}}</p>
-        <p>¿qué estimación de coste final para el proyecto haría? (en €)&nbsp;<{{1:NUMERICAL:%100%{costeFinal}:50#}}</p>
+        <p>{{1:MULTICHOICE_V:%{adelanto}%En adelanto#~%{planificado}%De acuerdo a lo planificado en plazo#~%{retraso}%En retraso#}}</p>
+        <p>¿qué estimación de coste final para el proyecto haría? (en €)&nbsp;{{1:NUMERICAL:%100%{costeFinal}:50#}}</p>
         <p>¿qué estimación de tiempo haría si utilizase el método del valor ganado? (en meses)&nbsp;{{1:NUMERICAL:%100%{tiempoFinal}:0.5#}}</p><br></p>
         """    
     text.text = etree.CDATA(text_content)
     
+    # Crear el elemento 'file' dentro de 'questiontext'
+    file = etree.SubElement(questiontext, 'file')
+    file.set('name', "ValorGanadoEjercicio.jpg")
+    file.set('path', "/")
+    file.set('encoding', "base64")
+    file.text = f"""{codificarGraficoValor}"""
+
     # Crear los elementos restantes
     generalfeedback = etree.SubElement(question, 'generalfeedback')
     generalfeedback.set('format', 'html')   
@@ -147,7 +175,7 @@ def EVM_xml(estadoCoste, estadoPlazo, costeFinal, tiempoFinal):
     idnumber = etree.SubElement(question, 'idnumber')
     
     # Convertir el árbol XML a una cadena y guardarla en el archivo 'ValorGanado.xml'
-    xml_str = etree.tostring(question, pretty_print=True, encoding='UTF-8', xml_declaration=True).decode('utf-8')  
+    xml_str = etree.tostring(quiz, pretty_print=True, encoding='UTF-8', xml_declaration=True).decode('utf-8')  
     with open('ValorGanado.xml', 'w', encoding='utf-8') as f:
         f.write(xml_str)
 
