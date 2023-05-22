@@ -1,54 +1,69 @@
 from lxml import etree
 from string import ascii_uppercase
+import random
 
-# Creación de pregunta 0 tipo tabla
+# Creación de pregunta 1 tipo tabla
 # Autor: Álvaro Hoyuelos Martín
 
 def create_xml():
-    # Solicitar al usuario el número de tareas
-    num_tasks = int(input("Indique el número de tareas(mínimo 6): "))
-    
+    # Solicitar al usuario el número de tareas y un rango de costes
+    tareasMax = int(input("Indique el número máximo de tareas(mínimo 6): "))
+    rangoCostes = input('Introduce el rango de costes para CPTP y CRTR separado por comas (ejemplo: 2000,5000): ')
+    costeMin, costeMax = map(int, rangoCostes.split(','))
+    numTareas = random.randrange(6, tareasMax)
+
     # Crear una lista para almacenar la información de las tareas
-    tasks = []
+    tareas = []
 
     # Variable para verificar si una tarea no está 100% completada
-    incomplete_task_found = False
+    tareaIncompleta = False
 
     # Inicializar variables para calcular PV, AC y EV
-    valor_planificado = 0
-    coste_actual = 0
-    valor_ganado = 0
+    valorPlanificado = 0
+    costeActual = 0
+    valorGanado = 0
     
-# Solicitar al usuario la información de cada tarea
-    for i in range(num_tasks):
-        task_name = ascii_uppercase[i]
-        CPTP = int(input(f"Introduce el CPTP para la tarea {task_name}: "))
+    # Solicitar al usuario la información de cada tarea
+    for i in range(numTareas):
+        nombreTarea = ascii_uppercase[i]
+        CPTP = random.randrange(costeMin // 100 * 100, (costeMax + 99) // 100 * 100 + 1, 100)
         # Para las tareas empezadas o completadas sí que se necesita su CRTR y %Completado
-        if not incomplete_task_found:
-            CRTR = int(input(f"Introduce el CRTR para la tarea {task_name}: "))
-            percent_completed = int(input(f"Introduce el % completado para la tarea {task_name}: "))
+        if not tareaIncompleta:
+            CRTR = random.randrange(costeMin // 100 * 100, (costeMax + 99) // 100 * 100 + 1, 100)
+            if i < 5:
+                porcentaje = 100
+            elif i == 5:
+                porcentaje = random.randint(1, 9) * 10
         else:
             CRTR = 0
-            percent_completed = 0
+            porcentaje = 0
         
-        tasks.append({'Tareas': task_name, 'CPTP': CPTP, 'CRTR': CRTR, '%Completado': percent_completed})
+        tareas.append({'Tareas': nombreTarea, 'CPTP': CPTP, 'CRTR': CRTR, '%Completado': porcentaje})
         # Calcular valor planificado, coste actual y valor ganado
-        if percent_completed == 100:
-            valor_planificado += CPTP
-        coste_actual += CRTR
-        valor_ganado += CPTP * (percent_completed / 100)
+        if porcentaje == 100:
+            valorPlanificado += CPTP
+        costeActual += CRTR
+        valorGanado += CPTP * (porcentaje / 100)
         
-        if percent_completed < 100:
-            incomplete_task_found = True
+        if porcentaje < 100:
+            tareaIncompleta = True
     
     # Calcular CPI y SPI
-    cpi = valor_ganado / coste_actual
-    spi = valor_ganado / valor_planificado
-    
-    # Crear el elemento raíz 'question'
-    question = etree.Element('question')
+    cpi = valorGanado / costeActual
+    spi = valorGanado / valorPlanificado
+
+    # Crear el elemento raíz 'quiz'
+    quiz = etree.Element('quiz')
+
+    # Crear el elemento 'question'
+    question = etree.SubElement(quiz, 'question')
     question.set('type', 'cloze')
-    
+
+    # Crear el elemento 'questiontext'   
+    name = etree.SubElement(question, 'name')
+    text = etree.SubElement(name, 'text')
+    text.text = 'Datos básicos'
+
     # Crear el elemento 'questiontext'
     questiontext = etree.SubElement(question, 'questiontext')
     questiontext.set('format', 'html')
@@ -71,40 +86,40 @@ def create_xml():
             </tr>"""
 
     # Agregar una fila a la tabla para cada tarea
-    for task in tasks:
-        if task['%Completado'] == 100:
+    for tarea in tareas:
+        if tarea['%Completado'] == 100:
             text_content += f"""
             <tr height="19">
-                <td height="19"><b>{task['Tareas']}</b></td>
-                <td align="right" style="text-align: center; "><b>{task['CPTP']}</b></td>
-                <td align="right" style="text-align: center; "><b>{task['CRTR']}</b></td>
-                <td align="right" style="text-align: center; "><b>{task['%Completado']}%</b></td>
+                <td height="19"><b>{tarea['Tareas']}</b></td>
+                <td align="right" style="text-align: center; "><b>{tarea['CPTP']}</b></td>
+                <td align="right" style="text-align: center; "><b>{tarea['CRTR']}</b></td>
+                <td align="right" style="text-align: center; "><b>{tarea['%Completado']}%</b></td>
             </tr>"""
         else:            
-            if task['%Completado'] > 0:
+            if tarea['%Completado'] > 0:
                 text_content += f"""
             <tr height="19">
-                <td height="19">{task['Tareas']}</td>
-                <td align="right" style="text-align: center; ">{task['CPTP']}</td>
-                <td align="right" style="text-align: center; ">{task['CRTR']}</td>
-                <td align="right" style="text-align: center; ">{task['%Completado']}%</td>
+                <td height="19">{tarea['Tareas']}</td>
+                <td align="right" style="text-align: center; ">{tarea['CPTP']}</td>
+                <td align="right" style="text-align: center; ">{tarea['CRTR']}</td>
+                <td align="right" style="text-align: center; ">{tarea['%Completado']}%</td>
             </tr>"""   
-            elif incomplete_task_found:
+            elif tareaIncompleta:
                 text_content += f"""
                 <tr height="19">
-                    <td height="19">{task['Tareas']}</td>
-                    <td align="right" style="text-align: center; ">{task['CPTP']}</td>
+                    <td height="19">{tarea['Tareas']}</td>
+                    <td align="right" style="text-align: center; ">{tarea['CPTP']}</td>
                     <td align="right" style="text-align: center; "></td>
                     <td align="right" style="text-align: center; "></td>
                 </tr>"""
              
     text_content += f"""
         </tbody></table><br>Calcule:
-        <p>El valor planificado (PV) en el momento actual {{1:NUMERICAL:%100%{valor_planificado}:0#}}</p>
-        <p>El coste actual (AC) en el momento actual {{1:NUMERICAL:%100%{coste_actual}:0#}}</p>
-        <p>El valor ganado (EV) en el momento actual {{1:NUMERICAL:%100%{valor_ganado}:0#}}</p>
-        <p>El CPI del proyecto (con dos decimales) {{1:NUMERICAL:%100%{round(cpi,2)}:0.01#{valor_ganado}/{coste_actual}}}</p>
-        <p>El SPI del proyecto (con dos decimales) {{1:NUMERICAL:%100%{round(spi,2)}:0.01#{valor_ganado}/{valor_planificado}}}</p><br><p></p>
+        <p>El valor planificado (PV) en el momento actual {{1:NUMERICAL:%100%{valorPlanificado}:0#}}</p>
+        <p>El coste actual (AC) en el momento actual {{1:NUMERICAL:%100%{costeActual}:0#}}</p>
+        <p>El valor ganado (EV) en el momento actual {{1:NUMERICAL:%100%{valorGanado}:0#}}</p>
+        <p>El CPI del proyecto (con dos decimales) {{1:NUMERICAL:%100%{round(cpi,2)}:0.01#{valorGanado}/{costeActual}}}</p>
+        <p>El SPI del proyecto (con dos decimales) {{1:NUMERICAL:%100%{round(spi,2)}:0.01#{valorGanado}/{valorPlanificado}}}</p><br><p></p>
         """
     
     text.text = etree.CDATA(text_content)
@@ -125,7 +140,7 @@ def create_xml():
     idnumber = etree.SubElement(question, 'idnumber')
     
     # Convertir el árbol XML a una cadena y guardarla en un archivo
-    xml_str = etree.tostring(question, pretty_print=True, encoding='UTF-8', xml_declaration=True).decode('utf-8')
+    xml_str = etree.tostring(quiz, pretty_print=True, encoding='UTF-8', xml_declaration=True).decode('utf-8')
     
     with open('Tabla.xml', 'w', encoding='utf-8') as f:
         f.write(xml_str)
