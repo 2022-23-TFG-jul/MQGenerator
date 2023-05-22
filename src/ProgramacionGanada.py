@@ -2,6 +2,9 @@ from lxml import etree
 import matplotlib.pyplot as plt
 import numpy as np
 import random
+import base64
+from PIL import Image
+from io import BytesIO
 
 # Creación de pregunta 3 sobre la Programación Ganada
 # Autor: Álvaro Hoyuelos Martín
@@ -63,13 +66,28 @@ def graficoProgramado():
     plt.ylabel('Coste acumulado (€)')
     plt.legend()
     plt.savefig('ProgramacionGanadaEjercicio.jpg')
-    
+    grafica = plt.imread('ProgramacionGanadaEjercicio.jpg')
+
     # Creación del fichero xml y calculo de los métodos
     costVarianceF = costVariance(valorEV, valorAC)
     calculoSPIF = calculoSPI(valorEV, valorPV)     
     tiempoProgramadoF  = tiempoProgramado(valorEV, valorPV) 
     mesesDiferenciaF = mesesDiferencia(mitadTiempo, indice_pv_ev, recta) 
-    ES_xml(costVarianceF, calculoSPIF, tiempoProgramadoF, mesesDiferenciaF)
+    codificarGraficoProgramadoF = codificarGraficoProgramado(grafica)
+    ES_xml(costVarianceF, calculoSPIF, tiempoProgramadoF, mesesDiferenciaF, codificarGraficoProgramadoF)
+
+def codificarGraficoProgramado(grafica):   
+    # Convertir la imagen de un arreglo de NumPy a un objeto de imagen de PIL
+    graficaPil = Image.fromarray(np.uint8(grafica))
+
+    # Guardar el gráfico en un objeto BytesIO
+    buffered = BytesIO()
+    graficaPil.save(buffered, format="JPEG")
+    
+    # Codificar la gráfica en base64 para conseguir la linea de texto
+    grafica64 = base64.b64encode(buffered.getvalue())
+    graficaCodificada = grafica64.decode("utf-8")
+    return graficaCodificada
 
 # Métodos para calcular las preguntas del cuestionario
 def costVariance(valorEV, valorAC):
@@ -94,9 +112,12 @@ def mesesDiferencia(mitadTiempo, indice_pv_ev, recta):
     meses_diferencia = abs(recta[indice_pv_ev] - recta[mitadTiempo])   
     return round(meses_diferencia,2)
 
-def ES_xml(costVariance, calculoSPI, tiempoProgramado, mesesDiferencia):
-    # Crear el elemento raíz 'question'
-    question = etree.Element('question')
+def ES_xml(costVariance, calculoSPI, tiempoProgramado, mesesDiferencia, codificarGraficoProgramado):
+    # Crear el elemento raíz 'quiz'
+    quiz = etree.Element('quiz')
+    
+    # Crear el elemento 'question'
+    question = etree.SubElement(quiz, 'question')
     question.set('type', 'cloze')
 
     # Crear el elemento 'questiontext'   
@@ -123,14 +144,21 @@ def ES_xml(costVariance, calculoSPI, tiempoProgramado, mesesDiferencia):
     text = etree.SubElement(questiontext, 'text')
     text_content = f"""
         <p></p><p>Le presentan el informe de valor ganado de un proyecto en curso (ver figura).&nbsp;</p>
-        <p><img src="ProgramacionGanadaEjercicio.jpg" alt="" width="861" height="614" role="presentation" style="vertical-align:text-bottom; margin: 0 .5em;" class="img-responsive"><br></p>
+        <p><img src="@@PLUGINFILE@@/ProgramacionGanadaEjercicio.jpg" alt="" width="574" height="409" role="presentation" style="vertical-align:text-bottom; margin: 0 .5em;" class="img-responsive"><br></p>
         <p>En vista de los datos,&nbsp;</p>
         <p>¿cuál es el Cost Variance del proyecto? (introducir con el signo apropiado) {{1:NUMERICAL:%100%{costVariance}:0#}}</p>
         <p>¿cuál es el SPI? (con dos decimales) {{1:NUMERICAL:%100%{calculoSPI}:0.1#}}</p>
-        <p>De acuerdo a la programación ganada el proyecto va: {{1:MULTICHOICE_V:{retrasado}%Retrasado#~{adelantado}%Adelantado#~{planificada}%De acuerdo a lo planificado#}} &nbsp;¿cuánto? (introducir en meses sin signo)&nbsp;{{1:NUMERICAL:%100%{mesesDiferencia}:0#}}</p><br></p>
+        <p>De acuerdo a la programación ganada el proyecto va: {{1:MULTICHOICE_V:%{retrasado}%Retrasado#~%{adelantado}%Adelantado#~%{planificada}%De acuerdo a lo planificado#}} &nbsp;¿cuánto? (introducir en meses sin signo)&nbsp;{{1:NUMERICAL:%100%{mesesDiferencia}:0#}}</p><br></p>
         """ 
     text.text = etree.CDATA(text_content)
     
+    # Crear el elemento 'file' dentro de 'questiontext'
+    file = etree.SubElement(questiontext, 'file')
+    file.set('name', "ProgramacionGanadaEjercicio.jpg")
+    file.set('path', "/")
+    file.set('encoding', "base64")
+    file.text = f"""{codificarGraficoProgramado}"""
+
     # Crear los elementos restantes
     generalfeedback = etree.SubElement(question, 'generalfeedback')
     generalfeedback.set('format', 'html')   
@@ -142,7 +170,7 @@ def ES_xml(costVariance, calculoSPI, tiempoProgramado, mesesDiferencia):
     idnumber = etree.SubElement(question, 'idnumber')
     
     # Convertir el árbol XML a una cadena y guardarla en el archivo 'ProgramacionGanada.xml'
-    xml_str = etree.tostring(question, pretty_print=True, encoding='UTF-8', xml_declaration=True).decode('utf-8')  
+    xml_str = etree.tostring(quiz, pretty_print=True, encoding='UTF-8', xml_declaration=True).decode('utf-8')  
     with open('ProgramacionGanada.xml', 'w', encoding='utf-8') as f:
         f.write(xml_str)
 
