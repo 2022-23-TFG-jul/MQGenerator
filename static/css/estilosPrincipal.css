@@ -1,0 +1,199 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background: url("../img/background.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+* {
+    box-sizing: border-box;
+}
+.contenedor{
+    width: 100%;
+    padding: 15px;
+}
+h1{
+    text-align: center;
+    color: #1a2537;
+    font-size: 40px;
+}
+.input-contenedor{
+    margin-bottom: 15px;
+    border: 1px solid #aaa;
+}
+.icon{
+    min-width: 50px;
+    text-align: center;
+    color: #999;
+}
+.button{
+    border: none;
+    width: 100%;
+    color: white;
+    font-size: 20px;
+    background:  #1a2537;
+    padding: 15px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.button:hover{
+    background: cadetblue;
+}
+p{
+    text-align: center;
+}
+
+.formulario__btn {
+    background-color: #306BFF !important;
+}
+
+.formulario__btn:hover {
+    background-color: #6EC2F7 !important;
+}
+
+button.formulario__btn > a {
+    text-decoration: none;
+    color: white;
+}
+
+.programas {
+    margin: auto;
+    padding-top: 13%;
+}
+
+.botones_programas {
+    padding: 1%;
+}
+
+@media(min-width:1024px)
+{
+    a.nav-link{
+        text-decoration: none;
+        color: #4F92FF;
+        font-weight: 600;
+        font-size: 200%;
+        width: 200%;
+        
+    }
+    
+    a.nav-link:hover {
+        color: #306BFF;
+    }
+
+    .logo-img {
+        width: 6%;
+        margin-left: 1%;
+    }
+
+    .logo-web {
+        width: 30%;
+    }
+
+    .navbar {
+        padding-top: 0;
+        margin: auto;
+    }
+
+    .index-img {
+        width: 20%;
+    }
+
+    #navbarUl {
+        margin-right: 30%;
+    }
+
+    #espana {
+        width: 5%;
+    }
+
+    #ingles {
+        width: 5%;
+    }
+
+    .banderaes {
+        width: 100%;
+    }
+
+    .banderaing {
+        width: 57%;
+    }
+
+    .current_user {
+        margin-right: 15%;
+    }
+
+
+}
+
+/*Para móviles*/
+@media(max-width:1024px)
+{   
+
+    a.nav-link{
+        text-decoration: none;
+        color: #6EC2F7;
+        font-weight: 600;
+        font-size: 100%;
+        width: 200%;
+        
+    }
+    
+    a.nav-link:hover {
+        color: #306BFF;
+    }
+
+    .logo-img {
+        width: 20%;
+        margin: auto;
+    }
+
+    .logo-web {
+        width: 80%;
+        margin: auto;
+        border-radius: 2%;
+    }
+
+    input.btn {
+        width: auto;
+    }
+
+    .index-img {
+        width: 50%;
+        margin-bottom: 12%;
+    }
+
+    #navbarUl {
+        margin-right: 0%;
+    }
+
+    #espana {
+        width: 20%;
+        margin-left: 30%;
+    }
+
+    #ingles {
+        width: 20%;
+    }
+
+    .banderaes {
+        width: 100%;
+    }
+
+    .banderaing {
+        width: 56%;
+    }
+
+    ul.lista > li {
+        margin: auto;
+    }
+
+    .menu-collapse > .button {
+        margin: auto !important;
+    }
+
+    .current_user {
+        margin-left: 40%;
+    }
+
+}
