@@ -65,7 +65,6 @@ def ProgramaValor():
         flash("El cálculo del valor ganado se ha completado correctamente.", "success")
     except Exception as e:
         flash("Error en el cálculo del valor ganado: " + str(e), "error")
-
     return render_template('ProgramaValor.html')
 
 @app.route('/ProgramaProgramacion', methods=['GET', 'POST'])
@@ -81,8 +80,19 @@ def ProgramaProgramacion():
         flash("El cálculo del valor ganado se ha completado correctamente.", "success")
     except Exception as e:
         flash("Error en el cálculo del valor ganado: " + str(e), "error")
-
     return render_template('ProgramaProgramacion.html')
+
+@app.route('/resultadoV', methods=['GET', 'POST'])
+def resultadoV():
+    return render_template('resultadoV.html')
+
+@app.route('/resultadoP', methods=['GET', 'POST'])
+def resultadoP():
+    return render_template('resultadoP.html')
+
+@app.route('/resultadoT', methods=['GET', 'POST'])
+def resultadoT():
+    return render_template('resultadoT.html')
 
 def shutdown_server():
     # Detener el servidor Flask
@@ -96,10 +106,20 @@ def shutdown():
     shutdown_server()
     return 'La aplicación se ha cerrado correctamente.'
 
-#@app.route('/download/<path:filename>')
-#def download_file(filename):
-    # DEscargar  xml , recach
-#    return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
+@app.route('/download_file/<filename>', methods=['GET'])
+def download_file(filename):
+    file_path = ''
+    if filename == 'ValorGanado.xml':
+        file_path = 'ValorGanado.xml'
+    elif filename == 'Tabla.xml':
+        file_path = 'Tabla.xml'
+    elif filename == 'ProgramacionGanada.xml':
+        file_path = 'ProgramacionGanada.xml'
+    else:
+        # Si se proporciona un nombre de archivo desconocido, devuelve un error 404
+        return 'Archivo no encontrado', 404
+    # Descargar el archivo
+    return send_file(file_path, as_attachment=True)
 
 if __name__ == '__main__':
     app.secret_key = 'key'  # Clave secreta para usar flash
