@@ -35,22 +35,55 @@
         </div>
     </nav>  
 
-    <form method = 'POST' action="{{ url_for('ProgramaProgramacion') }}">
-        <div>
-            <label for="rangoTiempoP">Introduce el rango de tiempo final (meses) separado por comas (ejemplo: 10,20)</label>
-            <p><input type="text" title="Rango tiempo" name="rangoTiempoP" required></p> 
+    <form method='POST' action="{{ url_for('ProgramaValor') }}">
+        <div class="col-12 main-section text-center">
+            <p></p>
+            <label for="rangoTiempoP">
+                <br /><h3>Introduce el rango de tiempo final (meses) separado por comas </h3><br />
+            </label>
+            <p><input type="text" title="Rango tiempo" name="rangoTiempoP" placeholder="ejemplo: 10,20" required></p>
+            <p> </p>
         </div>
-        <div>
-            <label for="rangoCostesP">Introduce el rango de coste acumulado final (€) separado por comas (ejemplo: 2000,50000)</label>
-            <p><input type="text" title="Rango costes" name="rangoCostesP" required></p> 
-        </div> 
-        <div>
-            <label for="numPreguntasP">Introduce el número de preguntas que quieres generar</label>
-            <p><input type="number" min="1" title="Número de preguntas" name="numPreguntasP" required></p> 
-        </div>  
-        <div> 
-            <button type="submit">Generar fichero</button>
-            <!--crear boton que sea descargar fichero xml y que redirecione a main.py   --> 
-        </div>    
-    </form>     
+        <div class="col-12 main-section text-center">       
+            <label for="rangoCostesP">
+                <br /><h3>Introduce el rango de coste acumulado final (€) separado por comas </h3> <br />
+            </label>
+            <p><input type="text" title="Rango costes" name="rangoCostesP" placeholder="ejemplo: 2000,50000" required>
+            </p>
+        </div>
+        <div class="col-md-12 main-section text-center">
+            <label for="numPreguntasP">            
+                <br /><h3>Introduce el número de preguntas que quieres generar </h3><br />
+            </label>
+            <p><input type="number" min="1" title="Número de preguntas" name="numPreguntasP" required></p><br />
+        </div>
+        <div class="col-md-12 main-section text-center"> 
+            <div class="row align-items-start justify-content-center botones_programas"></div>
+                <button type="button" class="btn btn-outline-danger btn-lg me-md-2"> 
+                    <a href="{{ url_for('programas') }}"><h4>Cancelar</h4> </a></button>
+                <button type="submit" class="btn btn-outline-primary btn-lg generarFichero" onclick="submitFormAndRedirect(event)">
+                    <h4>Generar Fichero</h4>
+                </button>
+            </div>
+        </div>
+    </form>
+<script>
+    function submitFormAndRedirect(event) {
+        event.preventDefault(); // Evitar el envío del formulario predeterminado
+        // Verificar campos vacíos
+        var rangoTiempoP = document.querySelector('input[name="rangoTiempoP"]').value;
+        var rangoCostesP = document.querySelector('input[name="rangoCostesP"]').value;
+        var numPreguntasP = document.querySelector('input[name="numPreguntasP"]').value;
+
+        if (rangoTiempoP.trim() === '' || rangoCostesP.trim() === '' || numPreguntasP.trim() === '') {
+            alert('Por favor, completa todos los campos antes de enviar el formulario.');
+            return;
+        }
+        // Enviar el formulario
+        document.querySelector('form').submit();
+        // Redirigir a la página resultadoP.html
+        window.location.href = "{{ url_for('resultadoP') }}";
+    }
+</script>
 </body>
+</html>
