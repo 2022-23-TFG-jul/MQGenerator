@@ -57,6 +57,20 @@ button.formulario__btn > a {
     color: white;
 }
 
+.generarFichero__btn {
+    background-color: none !important;
+}
+
+.generarFichero__btn:hover {
+    background-color: #98d6fd !important;
+}
+
+button.generarFichero__btn > a {
+    text-decoration: none;
+    color:#1a2537;
+}
+
+
 .programas {
     margin: auto;
     padding-top: 13%;
