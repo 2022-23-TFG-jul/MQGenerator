@@ -50,7 +50,7 @@ def ProgramaTabla():
     rangoCostes = request.form.get('rangoCostes')
     numPreguntas = int(request.form.get('numPreguntas'))
     src.Tabla.create_xml(tareasMax, rangoCostes, numPreguntas)
-    return render_template('ProgramaTabla.html')
+    return redirect(url_for('resultadoT'))
 
 @app.route('/ProgramaValor', methods=['GET', 'POST'])
 def ProgramaValor():
@@ -59,13 +59,12 @@ def ProgramaValor():
     rangoTiempoV = request.form.get('rangoTiempoV')      
     rangoCostesV = request.form.get('rangoCostesV')
     numPreguntasV = int(request.form.get('numPreguntasV'))
-    #src.ValorGanado.EVM_xml(rangoTiempoV, rangoCostesV, numPreguntasV)
     try:
         src.ValorGanado.EVM_xml(rangoTiempoV, rangoCostesV, numPreguntasV)
         flash("El cálculo del valor ganado se ha completado correctamente.", "success")
     except Exception as e:
         flash("Error en el cálculo del valor ganado: " + str(e), "error")
-    return render_template('ProgramaValor.html')
+    return redirect(url_for('resultadoV'))
 
 @app.route('/ProgramaProgramacion', methods=['GET', 'POST'])
 def ProgramaProgramacion():
@@ -74,13 +73,12 @@ def ProgramaProgramacion():
     rangoTiempoP = request.form.get('rangoTiempoP')      
     rangoCostesP = request.form.get('rangoCostesP')
     numPreguntasP = int(request.form.get('numPreguntasP'))
-    #src.ProgramacionGanada.ES_xml(rangoTiempoP, rangoCostesP, numPreguntasP)
     try:
         src.ProgramacionGanada.ES_xml(rangoTiempoP, rangoCostesP, numPreguntasP)
-        flash("El cálculo del valor ganado se ha completado correctamente.", "success")
+        flash("El cálculo de programación ganada se ha completado correctamente.", "success")
     except Exception as e:
-        flash("Error en el cálculo del valor ganado: " + str(e), "error")
-    return render_template('ProgramaProgramacion.html')
+        flash("Error en el cálculo de programación ganado: " + str(e), "error")
+    return redirect(url_for('resultadoP'))
 
 @app.route('/resultadoV', methods=['GET', 'POST'])
 def resultadoV():
