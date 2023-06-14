@@ -2,21 +2,11 @@ from flask import render_template, Flask, request, send_file, url_for, redirect,
 import src.Tabla
 import src.ValorGanado
 import src.ProgramacionGanada
-import tkinter as tk
 
 app = Flask(__name__)
 DEBUG = True
 PORT = 5000
 app.config['UPLOAD_FOLDER'] = 'src'
-
-def esperar(tiempo):
-    ventana.after(tiempo * 1000, ventana.destroy)
-
-ventana = tk.Tk()
-ventana.withdraw()
-tiempo_espera = 5  # Tiempo en segundos
-esperar(tiempo_espera)
-ventana.mainloop()
 
 @app.route('/')
 def index():
