@@ -36,53 +36,43 @@
     </nav>
     
     <form method = 'POST' action="{{ url_for('ProgramaTabla') }}">
-        <div class="col-12 main-section text-center">
-            <p></p>
-            <label for="tareasMax">
-                <br /><h3>Introduce el número máximo de tareas, mínimo 6</h3><br />
-            </label>
-            <p><input type="number" min="6" max="27" title="Número de tareas" name="tareasMax" required></p> 
-            <p></p>
-        </div>
-        <div class="col-12 main-section text-center">       
-            <label for="rangoCostes">
-                <br /><h3>Introduce el rango de costes para CPTP y CRTR separado por comas </h3>
-            </label>
-            <p><input type="text" title="Rango costes" name="rangoCostes" placeholder="ejemplo: 2000,5000" required></p> 
-        </div> 
-        <div class="col-md-12 main-section text-center">
-            <label for="numPreguntas">            
-                <br /><h3>Introduce el número de preguntas que quieres generar</h3><br />
-            </label>
-            <p><input type="number" min="1" title="Número de preguntas" name="numPreguntas" required></p><br />
-        </div>
-        <div class="col-md-12 main-section text-center"> 
-            <div class="row align-items-start justify-content-center botones_programas"></div>
-                <button type="button" class="btn btn-outline-danger btn-lg me-md-2"> 
-                    <a href="{{ url_for('programas') }}"><h4>Cancelar</h4> </a></button>
-                <button type="submit" class="btn btn-outline-primary btn-lg generarFichero" onclick="submitFormAndRedirect(event)">
-                    <h4>Generar Fichero</h4>
-                </button>
+        <div class="row">
+            <div class="col-md-6 text-center">
+                <div class="imagenEjemplo">
+                    <img class="imgejemplo" src="static/img/EjemploTabla.png" alt="Imagen de Ejemplo">
+                </div> 
+            </div>                    
+            <div class="col-md-6">
+                <div class="main-section text-center">               
+                    <label for="tareasMax">
+                        <br /><h3>Introduce el número máximo de tareas, mínimo 6</h3><br />
+                    </label>
+                    <p><input type="number" min="6" max="27" title="Número de tareas" name="tareasMax" required></p> 
+                    <p></p>
+            </div>
+            <div class="main-section text-center">       
+                <label for="rangoCostes">
+                    <br /><h3>Introduce el rango de costes para CPTP y CRTR separado por comas </h3><br />
+                </label>
+                <p><input type="text" title="Rango costes" name="rangoCostes" placeholder="ejemplo: 2000,5000" required></p> 
+                <p> </p>
+            </div> 
+            <div class="main-section text-center">
+                <label for="numPreguntas">            
+                    <br /><h3>Introduce el número de preguntas que quieres generar</h3><br />
+                </label>
+                <p><input type="number" min="1" title="Número de preguntas" name="numPreguntas" required></p><br />
+            </div>
+            <div class="col-md-12 main-section text-center"> 
+                <div class="row align-items-start justify-content-center botones_programas"></div>
+                    <button type="button" class="btn btn-outline-danger btn-lg me-md-2"> 
+                        <a href="{{ url_for('programas') }}"><h4>Cancelar</h4> </a></button>
+                    <button type="submit" class="btn btn-outline-primary btn-lg generarFichero">
+                        <h4>Generar Fichero</h4>
+                    </button>
+                </div>
             </div>
         </div>
     </form>
-    <script>
-        function submitFormAndRedirect(event) {
-            event.preventDefault(); // Evitar el envío del formulario predeterminado
-            // Verificar campos vacíos
-            var tareasMax = document.querySelector('input[name="tareasMax"]').value;
-            var rangoCostes = document.querySelector('input[name="rangoCostes"]').value;
-            var numPreguntas = document.querySelector('input[name="numPreguntas"]').value;
-    
-            if (tareasMax.trim() === '' || rangoCostes.trim() === '' || numPreguntas.trim() === '') {
-                alert('Por favor, completa todos los campos antes de enviar el formulario.');
-                return;
-            }
-            // Enviar el formulario
-            document.querySelector('form').submit();
-            // Redirigir a la página resultadoT.html
-            window.location.href = "{{ url_for('resultadoT') }}";
-        }
-    </script>
-    </body>
-    </html>
+</body>
+</html>

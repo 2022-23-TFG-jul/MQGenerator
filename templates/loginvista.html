@@ -18,6 +18,7 @@
                 <div class="col-sm-12 user-img">
                     <img src="static/img/user.png" th:src="@{static/img/user.png}" alt="Foto de perfil de la web" class="user-img"/>
                 </div>
+                <div id="liveAlertPlaceholder"></div>
                 <form action="#" method="post" class="formulario" id="formulario">
                     <h1>Inicia Sesión</h1>
                 <div class="contenedor">
@@ -31,7 +32,7 @@
                         <input type="password" id="password" name="password" placeholder="Contraseña" class="formulario__input" required>
                         <i class="formulario__validacion-estado fas fa-times-circle"></i>
                     </div>
-                    <input type="submit" name="Entrar" value="Entrar" class="btn btn-dark btn-lg">
+                    <input type="submit" id="login" name="Entrar" value="Entrar" class="btn btn-dark btn-lg">
                         <p>¿No tienes una cuenta? <a class="link" href='/'> Registrate </a></p>
                 </div>
                 </form>
