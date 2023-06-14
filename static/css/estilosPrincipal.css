@@ -5,7 +5,6 @@ body {
     background-size: cover;
     background-attachment: fixed;
 }
-
 * {
     box-sizing: border-box;
 }
@@ -57,20 +56,6 @@ button.formulario__btn > a {
     color: white;
 }
 
-.generarFichero__btn {
-    background-color: none !important;
-}
-
-.generarFichero__btn:hover {
-    background-color: #98d6fd !important;
-}
-
-button.generarFichero__btn > a {
-    text-decoration: none;
-    color:#1a2537;
-}
-
-
 .programas {
     margin: auto;
     padding-top: 13%;
@@ -80,6 +65,7 @@ button.generarFichero__btn > a {
     padding: 1%;
 }
 
+/*Para ordenadores*/
 @media(min-width:1024px)
 {
     a.nav-link{
@@ -130,17 +116,20 @@ button.generarFichero__btn > a {
     }
 
     .banderaing {
-        width: 57%;
+        width: 56%;
     }
 
     .current_user {
         margin-right: 15%;
     }
 
+    .imgejemplo {
+        width: 70%;
+    }
 
 }
 
-/*Para móviles*/
+/*Para móviles y tablets*/
 @media(max-width:1024px)
 {   
 
@@ -210,4 +199,7 @@ button.generarFichero__btn > a {
         margin-left: 40%;
     }
 
+    .imgejemplo {
+        width: 70%;
+    }
 }

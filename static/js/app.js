@@ -2,6 +2,7 @@ const formulario = document.getElementById('formulario');
 const inputs = document.querySelectorAll('#formulario input');
 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
 const datosRegistro = new Array();
+const login = document.getElementById('login');
 
 const expresiones = {
 	usuarioycontra: /^[a-zA-Z0-9_-]{4,16}$/, // Letras, numeros, guion y guion_bajo
@@ -34,7 +35,7 @@ const validarFormulario = (e) => {
 
 const validarCampo = (expresion, input, campo) => {
 	if(expresion.test(input.value)){
-		//si esta bien
+		// Si esta bien
 		document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-incorrecto');
 		document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-correcto');
 		document.querySelector(`#grupo__${campo} i.formulario__validacion-estado`).classList.add('fa-check-circle');
@@ -50,7 +51,7 @@ const validarCampo = (expresion, input, campo) => {
 		campos[campo] = false;
 	} 
 	else {
-		//si esta mal
+		// Si esta mal
 		document.querySelector(`#grupo__${campo} i.formulario__validacion-estado`).classList.add('fa-times-circle');
 		document.querySelector(`#grupo__${campo} i.formulario__validacion-estado`).classList.remove('fa-check-circle');
 		campos[campo] = false;
@@ -65,7 +66,19 @@ formulario.addEventListener('submit', (e) => {
 	e.preventDefault();
 	if(campos.usuario && campos.nombre && campos.password && campos.apellidos){
 		formulario.reset();
-		//te lleva a la pagina principal porque no hay base de datos para registrar ni comprobar datos xd
+		// Te lleva a la pagina principal porque no hay base de datos para registrar ni comprobar datos xd
+		let wrapper = document.createElement('div');
+		wrapper.innerHTML = '<div class="alert alert-success alert-dismissible" role="alert">' + 'Bienvenido: ' + datosRegistro.usuario + '<button type="button" id="btn-close" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +'</div>';
+		alertPlaceholder.append(wrapper);
+		setTimeout( function() { window.location.href = "inicio" }, 3000 );
+	}
+});
+
+login.addEventListener('click', (e) => {
+	e.preventDefault();
+	if(campos.usuario && campos.password){
+		formulario.reset();
+		// Te lleva a la pagina principal porque no hay base de datos para registrar ni comprobar datos
 		let wrapper = document.createElement('div');
 		wrapper.innerHTML = '<div class="alert alert-success alert-dismissible" role="alert">' + 'Bienvenido: ' + datosRegistro.usuario + '<button type="button" id="btn-close" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +'</div>';
 		alertPlaceholder.append(wrapper);
