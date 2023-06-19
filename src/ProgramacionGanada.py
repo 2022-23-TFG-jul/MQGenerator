@@ -12,7 +12,7 @@ import os
 # Creación de pregunta 3 sobre la Programación Ganada
 # Autor: Álvaro Hoyuelos Martín
 
-def ES_xml(rangoTiempoP, rangoCostesP, numPreguntasP):
+def ES_xml(rangoTiempoP, rangoCostesP, numPreguntasP, idiomaP):
     # Transformar el rango introducido en valores numéricos
     tiempoMinP, tiempoMaxP = map(int, rangoTiempoP.split(','))
     costeMinP, costeMaxP = map(int, rangoCostesP.split(','))
@@ -65,9 +65,13 @@ def ES_xml(rangoTiempoP, rangoCostesP, numPreguntasP):
         plt.axvline(x = rectaP[indice_pv_ac], color = 'gray', linestyle = ':')
         plt.text(rectaP[indice_pv_ac] + 0.1, rectaP[indice_pv_ac] + 2000, f'{rectaP[indice_pv_ac]:.2f}', color = 'gray')
 
+        if idiomaP == 'esp':
         # Añadir leyenda y título a la x e y de la gráfica y guardar la gráfica como una imagen
-        plt.xlabel('Tiempo (meses)')
-        plt.ylabel('Coste acumulado (€)')
+            plt.xlabel('Tiempo (meses)')
+            plt.ylabel('Coste acumulado (€)')
+        else: 
+            plt.xlabel('Time (months)')
+            plt.ylabel('Accumulated Cost (€)')
         plt.legend()
         plt.savefig(f'ProgramacionGanadaEjercicio{numPreguntasP}.jpg')
         plt.close()
@@ -109,7 +113,10 @@ def ES_xml(rangoTiempoP, rangoCostesP, numPreguntasP):
         # Crear el elemento 'questiontext'   
         name = etree.SubElement(question, 'name')
         text = etree.SubElement(name, 'text')
-        text.text = f'Problema Programación ganada {numPreguntasP}'
+        if idiomaP == 'esp':
+            text.text = f'Problema Programación ganada {numPreguntasP}'
+        else:
+            text.text = f'Earned Scheduling problem {numPreguntasP}'
 
         # Crear el elemento 'questiontext'
         questiontext = etree.SubElement(question, 'questiontext')
@@ -128,16 +135,27 @@ def ES_xml(rangoTiempoP, rangoCostesP, numPreguntasP):
 
         # Crear el elemento 'text' dentro de 'questiontext' y su contenido
         text = etree.SubElement(questiontext, 'text')
-        text_content = f"""
+        # Para el español
+        if idiomaP == 'esp':
+            text_content = f"""
             <p></p><p>Le presentan el informe de valor ganado de un proyecto en curso (ver figura).&nbsp;</p>
             <p><img src="@@PLUGINFILE@@/ProgramacionGanadaEjercicio{numPreguntasP}.jpg" alt="" width="574" height="409" role="presentation" style="vertical-align:text-bottom; margin: 0 .5em;" class="img-responsive"><br></p>
             <p>En vista de los datos,&nbsp;</p>
-            <p>¿cuál es el Cost Variance del proyecto? (introducir con el signo apropiado) {{1:NUMERICAL:%100%{costVariance}:0#}}</p>
-            <p>¿cuál es el SPI? (con dos decimales) {{1:NUMERICAL:%100%{calculoSPI}:0.1#}}</p>
-            <p>De acuerdo a la programación ganada el proyecto va: {{1:MULTICHOICE_V:%{retrasado}%Retrasado#~%{adelantado}%Adelantado#~%{planificada}%De acuerdo a lo planificado#}} &nbsp;¿cuánto? (introducir en meses sin signo y 2 decimales)&nbsp;{{1:NUMERICAL:%100%{mesesDiferencia}:0#}}</p><br></p>
+            <p>¿Cuál es el Cost Variance del proyecto? (introducir con el signo apropiado) {{1:NUMERICAL:%100%{costVariance}:0#}}</p>
+            <p>¿Cuál es el SPI? (con dos decimales) {{1:NUMERICAL:%100%{calculoSPI}:0.1#}}</p>
+            <p>De acuerdo a la Programación Ganada el proyecto va: {{1:MULTICHOICE_V:%{retrasado}%Retrasado#~%{adelantado}%Adelantado#~%{planificada}%De acuerdo a lo planificado#}} &nbsp;¿cuánto? (introducir en meses sin signo y 2 decimales)&nbsp;{{1:NUMERICAL:%100%{mesesDiferencia}:0#}}</p><br></p>
             """ 
+        else:
+            text_content = f"""
+            <p></p><p>You are presented with the Earned Value report of an ongoing project (see the figure).&nbsp;</p>
+            <p><img src="@@PLUGINFILE@@/ProgramacionGanadaEjercicio{numPreguntasP}.jpg" alt="" width="574" height="409" role="presentation" style="vertical-align:text-bottom; margin: 0 .5em;" class="img-responsive"><br></p>
+            <p>Based on the data,&nbsp;</p>
+            <p>What is the Cost Variance of the project (enter with the appropriate sign)? {{1:NUMERICAL:%100%{costVariance}:0#}}</p>
+            <p>What is the SPI (to two decimals)? {{1:NUMERICAL:%100%{calculoSPI}:0.1#}}</p>
+            <p>According to the Earned Scheduling the project goes: {{1:MULTICHOICE_V:%{retrasado}%Delayed#~%{adelantado}%Advanced#~%{planificada}%According to plan#}} &nbsp;How much? (enter in months without sign and 2 decimals)&nbsp;{{1:NUMERICAL:%100%{mesesDiferencia}:0#}}</p><br></p>
+            """             
         text.text = etree.CDATA(text_content)
-        
+  
         # Crear el elemento 'file' dentro de 'questiontext'
         file = etree.SubElement(questiontext, 'file')
         file.set('name', f"ProgramacionGanadaEjercicio{numPreguntasP}.jpg")

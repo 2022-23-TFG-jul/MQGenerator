@@ -12,7 +12,7 @@ import os
 # Creación de pregunta 2 sobre el Valor Ganado
 # Autor: Álvaro Hoyuelos Martín
 
-def EVM_xml(rangoTiempoV, rangoCostesV, numPreguntasV):
+def EVM_xml(rangoTiempoV, rangoCostesV, numPreguntasV, idiomaV):
     # Transformar el rango introducido en valores numéricos
     tiempoMinV, tiempoMaxV = map(int, rangoTiempoV.split(','))
     costeMinV, costeMaxV = map(int, rangoCostesV.split(','))
@@ -57,9 +57,13 @@ def EVM_xml(rangoTiempoV, rangoCostesV, numPreguntasV):
         plt.axvline(x = tiempoTotalV, color = 'r', linestyle = ':')
         plt.text(tiempoTotalV - 2, valorFinalPV, f'{valorFinalPV:.2f} €', color = 'r')     
 
+        if idiomaV == 'esp':
         # Añadir leyenda y título a la x e y de la gráfica y guardar la gráfica como una imagen
-        plt.xlabel('Tiempo (meses)')
-        plt.ylabel('Coste acumulado (€)')
+            plt.xlabel('Tiempo (meses)')
+            plt.ylabel('Coste acumulado (€)')
+        else: 
+            plt.xlabel('Time (months)')
+            plt.ylabel('Accumulated Cost (€)')
         plt.legend()
         plt.savefig(f'ValorGanadoEjercicio{numPreguntasV}.jpg')
         plt.close()
@@ -96,8 +100,8 @@ def EVM_xml(rangoTiempoV, rangoCostesV, numPreguntasV):
         costeFinal = round(valorFinalPV / cpi, 2)
         # Para el tiempo final
         spi = valorEV / valorPV
-        tiempoFinal = round(tiempoTotalV / spi, 2)
-        
+        tiempoFinal = round(tiempoTotalV / spi, 2)        
+
         # Crear el elemento 'question'
         question = etree.SubElement(quiz, 'question')
         question.set('type', 'cloze')
@@ -105,7 +109,10 @@ def EVM_xml(rangoTiempoV, rangoCostesV, numPreguntasV):
         # Crear el elemento 'questiontext'   
         name = etree.SubElement(question, 'name')
         text = etree.SubElement(name, 'text')
-        text.text = f'Problema Valor ganado {numPreguntasV}'
+        if idiomaV == 'esp':
+            text.text = f'Problema Valor ganado {numPreguntasV}'
+        else:
+            text.text = f'Earned Value problem {numPreguntasV}'
 
         # Crear el elemento 'questiontext'
         questiontext = etree.SubElement(question, 'questiontext')
@@ -130,21 +137,36 @@ def EVM_xml(rangoTiempoV, rangoCostesV, numPreguntasV):
             planificado = 100
         if estadoPlazo == 'En retraso':
             retraso = 100
-
-        # Crear el elemento 'text' dentro de 'questiontext' y su contenido
-        text = etree.SubElement(questiontext, 'text')
-        text_content = f"""
+        # Para el español
+        if idiomaV == 'esp':
+            # Crear el elemento 'text' dentro de 'questiontext' y su contenido
+            text = etree.SubElement(questiontext, 'text')
+            text_content = f"""
             <p>Le presentan el informe de valor ganado de un proyecto en curso (ver figura).<br></p>
             <p><img src="@@PLUGINFILE@@/ValorGanadoEjercicio{numPreguntasV}.jpg" alt="" width="574" height="372" role="presentation" style="vertical-align:text-bottom; margin: 0 .5em;" class="img-responsive"><br></p>
             <p>En vista de los datos, ¿cómo va el proyecto en costes?</p>
             <p>{{1:MULTICHOICE_V:%{sobrecoste}%Con sobrecoste#~%{acordado}%Con costes de acuerdo a lo planificado#~%{ahorro}%Con ahorro en coste#}}</p>
             <p>¿Y en tiempo?</p>
             <p>{{1:MULTICHOICE_V:%{adelanto}%En adelanto#~%{planificado}%De acuerdo a lo planificado en plazo#~%{retraso}%En retraso#}}</p>
-            <p>¿qué estimación de coste final para el proyecto haría? (en €)&nbsp;{{1:NUMERICAL:%100%{costeFinal}:50#}}</p>
-            <p>¿qué estimación de tiempo haría si utilizase el método del valor ganado? (en meses con dos decimales)&nbsp;{{1:NUMERICAL:%100%{tiempoFinal}:0.5#}}</p><br></p>
+            <p>¿Qué estimación de coste final para el proyecto haría? (en €)&nbsp;{{1:NUMERICAL:%100%{costeFinal}:50#}}</p>
+            <p>¿Qué estimación de tiempo haría si utilizase el método del valor ganado? (en meses con dos decimales)&nbsp;{{1:NUMERICAL:%100%{tiempoFinal}:0.5#}}</p><br></p>
             """    
-        text.text = etree.CDATA(text_content)
-            
+            text.text = etree.CDATA(text_content)
+        # Para el inglés
+        else:
+            text = etree.SubElement(questiontext, 'text')
+            text_content = f"""
+            <p>You are presented with the Earned Value report of an ongoing project (see the figure).<br></p>
+            <p><img src="@@PLUGINFILE@@/ValorGanadoEjercicio{numPreguntasV}.jpg" alt="" width="574" height="372" role="presentation" style="vertical-align:text-bottom; margin: 0 .5em;" class="img-responsive"><br></p>
+            <p>Based on the data, how is the project progressing in terms of costs?</p>
+            <p>{{1:MULTICHOICE_V:%{sobrecoste}%With additional cost#~%{acordado}%With costs according to the plan#~%{ahorro}%With cost savings#}}</p>
+            <p>And in time?</p>
+            <p>{{1:MULTICHOICE_V:%{adelanto}%In advance#~%{planificado}%According to plan on time#~%{retraso}%In delay#}}</p>
+            <p>What is the final cost estimate for the project? (in €)&nbsp;{{1:NUMERICAL:%100%{costeFinal}:50#}}</p>
+            <p>What time estimation would you make if you used the Earned Value Method? (in months with two decimals)&nbsp;{{1:NUMERICAL:%100%{tiempoFinal}:0.5#}}</p><br></p>
+            """    
+            text.text = etree.CDATA(text_content)
+                
         # Crear el elemento 'file' dentro de 'questiontext'
         file = etree.SubElement(questiontext, 'file')
         file.set('name', f"ValorGanadoEjercicio{numPreguntasV}.jpg")
@@ -161,8 +183,6 @@ def EVM_xml(rangoTiempoV, rangoCostesV, numPreguntasV):
         hidden = etree.SubElement(question, 'hidden')
         hidden.text = '0'   
         idnumber = etree.SubElement(question, 'idnumber')
-        # Cierra la imagen y la elimina para poder crear otra gráfica desde 0
-        # plt.close()
         os.remove(f'ValorGanadoEjercicio{numPreguntasV}.jpg')
         
     # Convertir el árbol XML a una cadena y guardarla en el archivo 'ValorGanado.xml'
