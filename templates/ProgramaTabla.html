@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>       
 </head>
 <body>
     <nav id="navBar" class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;"> 
@@ -20,16 +20,16 @@
         <div class="collapse navbar-collapse menu-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto lista" id="navbarUl">
                 <li class="nav-item active">
-                <a class="nav-link" href="inicio">Inicio</a>
+                <a class="nav-link" href="inicio" data-i18n="inicio"></a>
                 </li>
         <li class="nav-item">
-                <a class="nav-link" href="https://github.com/xhm1001/MQGenerator">Repositorio</a>
+                <a class="nav-link" href="https://github.com/xhm1001/MQGenerator" data-i18n="repositorio"></a>
         </li>
         <li class="nav-item">
-                <a class="nav-link" href="principal">Más información</a>
+                <a class="nav-link" href="principal"  data-i18n="mas_informacion"></a>
         </li>
         </ul>
-        <div class="current_user">Bienvenido</div>
+        <div class="current_user" data-i18n="hola"></div>
         <button id="espana"><img src="static/img/espana.png" class="banderaes" alt="Bandera España"></button>
         <button id="ingles"><img src="static/img/ingles.png" class="banderaing" alt="Bandera Inglesa"></button>
         </div>
@@ -39,40 +39,50 @@
         <div class="row">
             <div class="col-md-6 text-center">
                 <div class="imagenEjemplo">
-                    <img class="imgejemplo" src="static/img/EjemploTabla.png" alt="Imagen de Ejemplo">
-                </div> 
+                    <img id="imagenEjemplo" class="imgejemplo" src="static/img/EjemploTabla.png" alt="Imagen de Ejemplo">
+                </div>                
             </div>                    
             <div class="col-md-6">
                 <div class="main-section text-center">               
                     <label for="tareasMax">
-                        <br /><h3>Introduce el número máximo de tareas, mínimo 6</h3><br />
+                        <br /><h3 data-i18n="tareas_tabla"></h3><br />
                     </label>
                     <p><input type="number" min="6" max="27" title="Número de tareas" name="tareasMax" required></p> 
                     <p></p>
             </div>
             <div class="main-section text-center">       
                 <label for="rangoCostes">
-                    <br /><h3>Introduce el rango de costes para CPTP y CRTR separado por comas </h3><br />
+                    <br /><h3 data-i18n="costes_tabla"></h3><br />
                 </label>
-                <p><input type="text" title="Rango costes" name="rangoCostes" placeholder="ejemplo: 2000,5000" required></p> 
+                <p><input type="text" title="Rango costes" name="rangoCostes" placeholder="ex: 2000,5000" required ></p> 
                 <p> </p>
             </div> 
             <div class="main-section text-center">
                 <label for="numPreguntas">            
-                    <br /><h3>Introduce el número de preguntas que quieres generar</h3><br />
+                    <br /><h3 data-i18n="preguntas"></h3><br />
                 </label>
                 <p><input type="number" min="1" title="Número de preguntas" name="numPreguntas" required></p><br />
-            </div>
+            </div>  
+            <div class="main-section text-center">
+                <label for="idiomaT">   
+                    <h3 data-i18n="idioma"></h3><br />        
+                </label>                 
+                <p><select class="main-section text-center" aria-label="Default select example" name="idiomaT">
+                    <option value="esp" data-i18n="esp"></option>
+                    <option value="eng" data-i18n="eng"></option>
+                </select></p>
+            </div>             
             <div class="col-md-12 main-section text-center"> 
                 <div class="row align-items-start justify-content-center botones_programas"></div>
                     <button type="button" class="btn btn-outline-danger btn-lg me-md-2"> 
-                        <a href="{{ url_for('programas') }}"><h4>Cancelar</h4> </a></button>
+                        <a href="{{ url_for('programas') }}"><h4 data-i18n="cancelar"></h4> </a></button>
                     <button type="submit" class="btn btn-outline-primary btn-lg generarFichero">
-                        <h4>Generar Fichero</h4>
+                        <h4 data-i18n="generar_fichero"></h4>
                     </button>
                 </div>
             </div>
         </div>
     </form>
+    <script src="/static/js/traductor.js"></script>
 </body>
 </html>
