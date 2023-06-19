@@ -1,16 +1,17 @@
-from flask import render_template, Flask, request, send_file, url_for, redirect, flash , json, make_response, g, session, send_from_directory
+from flask import render_template, Flask, request, send_file, url_for, redirect
 import src.Tabla
 import src.ValorGanado
 import src.ProgramacionGanada
 
 app = Flask(__name__)
+app.secret_key = 'Estoesunaclavesecreto'  # Clave secreta
 DEBUG = True
 PORT = 5000
 app.config['UPLOAD_FOLDER'] = 'src'
 
 @app.route('/')
 def index():
-    return render_template('registrarvista.html')
+    return render_template('inicio.html')
 
 @app.route('/registrarvista', methods=['GET', 'POST'])
 def registrarvista():
@@ -39,7 +40,8 @@ def ProgramaTabla():
     tareasMax = int(request.form.get('tareasMax'))        
     rangoCostes = request.form.get('rangoCostes')
     numPreguntas = int(request.form.get('numPreguntas'))
-    src.Tabla.create_xml(tareasMax, rangoCostes, numPreguntas)
+    idiomaT = request.form.get('idiomaT')
+    src.Tabla.create_xml(tareasMax, rangoCostes, numPreguntas, idiomaT)
     return redirect(url_for('resultadoT'))
 
 @app.route('/ProgramaValor', methods=['GET', 'POST'])
@@ -49,11 +51,8 @@ def ProgramaValor():
     rangoTiempoV = request.form.get('rangoTiempoV')      
     rangoCostesV = request.form.get('rangoCostesV')
     numPreguntasV = int(request.form.get('numPreguntasV'))
-    try:
-        src.ValorGanado.EVM_xml(rangoTiempoV, rangoCostesV, numPreguntasV)
-        flash("El cálculo del valor ganado se ha completado correctamente.", "success")
-    except Exception as e:
-        flash("Error en el cálculo del valor ganado: " + str(e), "error")
+    idiomaV = request.form.get('idiomaV')
+    src.ValorGanado.EVM_xml(rangoTiempoV, rangoCostesV, numPreguntasV, idiomaV)
     return redirect(url_for('resultadoV'))
 
 @app.route('/ProgramaProgramacion', methods=['GET', 'POST'])
@@ -63,11 +62,8 @@ def ProgramaProgramacion():
     rangoTiempoP = request.form.get('rangoTiempoP')      
     rangoCostesP = request.form.get('rangoCostesP')
     numPreguntasP = int(request.form.get('numPreguntasP'))
-    try:
-        src.ProgramacionGanada.ES_xml(rangoTiempoP, rangoCostesP, numPreguntasP)
-        flash("El cálculo de programación ganada se ha completado correctamente.", "success")
-    except Exception as e:
-        flash("Error en el cálculo de programación ganado: " + str(e), "error")
+    idiomaP = request.form.get('idiomaP')
+    src.ProgramacionGanada.ES_xml(rangoTiempoP, rangoCostesP, numPreguntasP, idiomaP)
     return redirect(url_for('resultadoP'))
 
 @app.route('/resultadoV', methods=['GET', 'POST'])
@@ -110,5 +106,4 @@ def download_file(filename):
     return send_file(file_path, as_attachment=True)
 
 if __name__ == '__main__':
-    app.secret_key = 'key'  # Clave secreta para usar flash
     app.run(port = PORT, debug = DEBUG)
