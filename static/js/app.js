@@ -70,7 +70,7 @@ formulario.addEventListener('submit', (e) => {
 		let wrapper = document.createElement('div');
 		wrapper.innerHTML = '<div class="alert alert-success alert-dismissible" role="alert">' + 'Bienvenido: ' + datosRegistro.usuario + '<button type="button" id="btn-close" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +'</div>';
 		alertPlaceholder.append(wrapper);
-		setTimeout( function() { window.location.href = "inicio" }, 3000 );
+		setTimeout( function() { window.location.href = "programas" }, 3000 );
 	}
 });
 
@@ -82,6 +82,6 @@ login.addEventListener('click', (e) => {
 		let wrapper = document.createElement('div');
 		wrapper.innerHTML = '<div class="alert alert-success alert-dismissible" role="alert">' + 'Bienvenido: ' + datosRegistro.usuario + '<button type="button" id="btn-close" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +'</div>';
 		alertPlaceholder.append(wrapper);
-		setTimeout( function() { window.location.href = "inicio" }, 3000 );
+		setTimeout( function() { window.location.href = "programas" }, 3000 );
 	}
 });
