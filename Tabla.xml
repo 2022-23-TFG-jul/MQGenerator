@@ -1,0 +1,459 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<quiz>
+  <question type="cloze">
+    <name>
+      <text>Datos básicos 1</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p>Suponga un proyecto en el que en el momento actual y de acuerdo al plan de proyecto<b><u> las actividades desde la A hasta la E</u></b> deberían estar ya completadas y el resto de actividades no comenzadas.</p>
+        <p>El informe de seguimiento del proyecto es el siguiente:</p>
+        <table border="0" cellpadding="0" cellspacing="0" width="320" style="text-align: center; ">
+            <colgroup><col width="80" span="4"></colgroup>
+            <tbody>
+                <tr height="19">
+                    <td height="19" width="80"><b>Tareas</b></td>
+                    <td width="80"><b>CPTP</b></td>
+                    <td width="80"><b>CRTR</b></td>
+                    <td width="80"><b>%Completado</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>A</b></td>
+                    <td align="right" style="text-align: center; "><b>1900</b></td>
+                    <td align="right" style="text-align: center; "><b>3700</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>B</b></td>
+                    <td align="right" style="text-align: center; "><b>1600</b></td>
+                    <td align="right" style="text-align: center; "><b>7900</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>C</b></td>
+                    <td align="right" style="text-align: center; "><b>4000</b></td>
+                    <td align="right" style="text-align: center; "><b>2100</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>D</b></td>
+                    <td align="right" style="text-align: center; "><b>7300</b></td>
+                    <td align="right" style="text-align: center; "><b>1900</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>E</b></td>
+                    <td align="right" style="text-align: center; "><b>7500</b></td>
+                    <td align="right" style="text-align: center; "><b>5300</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19">F</td>
+                    <td align="right" style="text-align: center; ">6400</td>
+                    <td align="right" style="text-align: center; ">5700</td>
+                    <td align="right" style="text-align: center; ">30%</td>
+                </tr>
+                    <tr height="19">
+                        <td height="19">G</td>
+                        <td align="right" style="text-align: center; ">1500</td>
+                        <td align="right" style="text-align: center; "></td>
+                        <td align="right" style="text-align: center; "></td>
+                    </tr>
+                    <tr height="19">
+                        <td height="19">H</td>
+                        <td align="right" style="text-align: center; ">6900</td>
+                        <td align="right" style="text-align: center; "></td>
+                        <td align="right" style="text-align: center; "></td>
+                    </tr>
+            </tbody></table><br>Calcule:
+            <p>El valor planificado (PV) en el momento actual {1:NUMERICAL:%100%22300:0#}</p>
+            <p>El coste actual (AC) en el momento actual {1:NUMERICAL:%100%26600:0#}</p>
+            <p>El valor ganado (EV) en el momento actual {1:NUMERICAL:%100%24220.0:0#}</p>
+            <p>El CPI del proyecto (con dos decimales) {1:NUMERICAL:%100%0.91:0.01#24220.0/26600}</p>
+            <p>El SPI del proyecto (con dos decimales) {1:NUMERICAL:%100%1.09:0.01#24220.0/22300}</p><br><p></p>
+            ]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text>Para calcular PV= Sumar el CPTP de todas las tareas completadas. &lt;br&gt;Para calcular AC= Sumar todos los CRTR.&lt;br&gt;Para calcular EV= Multiplicar los CPTP por sus respectivos porcentajes y sumarlos.&lt;br&gt;Para calcular CPI= Dividir EV por el AC.&lt;br&gt;Para calcular SPI= Dividir EV por el PV. </text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+  </question>
+  <question type="cloze">
+    <name>
+      <text>Datos básicos 2</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p>Suponga un proyecto en el que en el momento actual y de acuerdo al plan de proyecto<b><u> las actividades desde la A hasta la E</u></b> deberían estar ya completadas y el resto de actividades no comenzadas.</p>
+        <p>El informe de seguimiento del proyecto es el siguiente:</p>
+        <table border="0" cellpadding="0" cellspacing="0" width="320" style="text-align: center; ">
+            <colgroup><col width="80" span="4"></colgroup>
+            <tbody>
+                <tr height="19">
+                    <td height="19" width="80"><b>Tareas</b></td>
+                    <td width="80"><b>CPTP</b></td>
+                    <td width="80"><b>CRTR</b></td>
+                    <td width="80"><b>%Completado</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>A</b></td>
+                    <td align="right" style="text-align: center; "><b>2600</b></td>
+                    <td align="right" style="text-align: center; "><b>3400</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>B</b></td>
+                    <td align="right" style="text-align: center; "><b>3800</b></td>
+                    <td align="right" style="text-align: center; "><b>6400</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>C</b></td>
+                    <td align="right" style="text-align: center; "><b>2700</b></td>
+                    <td align="right" style="text-align: center; "><b>6800</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>D</b></td>
+                    <td align="right" style="text-align: center; "><b>2600</b></td>
+                    <td align="right" style="text-align: center; "><b>6300</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>E</b></td>
+                    <td align="right" style="text-align: center; "><b>6500</b></td>
+                    <td align="right" style="text-align: center; "><b>4600</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19">F</td>
+                    <td align="right" style="text-align: center; ">5300</td>
+                    <td align="right" style="text-align: center; ">6200</td>
+                    <td align="right" style="text-align: center; ">30%</td>
+                </tr>
+                    <tr height="19">
+                        <td height="19">G</td>
+                        <td align="right" style="text-align: center; ">2500</td>
+                        <td align="right" style="text-align: center; "></td>
+                        <td align="right" style="text-align: center; "></td>
+                    </tr>
+            </tbody></table><br>Calcule:
+            <p>El valor planificado (PV) en el momento actual {1:NUMERICAL:%100%18200:0#}</p>
+            <p>El coste actual (AC) en el momento actual {1:NUMERICAL:%100%33700:0#}</p>
+            <p>El valor ganado (EV) en el momento actual {1:NUMERICAL:%100%19790.0:0#}</p>
+            <p>El CPI del proyecto (con dos decimales) {1:NUMERICAL:%100%0.59:0.01#19790.0/33700}</p>
+            <p>El SPI del proyecto (con dos decimales) {1:NUMERICAL:%100%1.09:0.01#19790.0/18200}</p><br><p></p>
+            ]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text>Para calcular PV= Sumar el CPTP de todas las tareas completadas. &lt;br&gt;Para calcular AC= Sumar todos los CRTR.&lt;br&gt;Para calcular EV= Multiplicar los CPTP por sus respectivos porcentajes y sumarlos.&lt;br&gt;Para calcular CPI= Dividir EV por el AC.&lt;br&gt;Para calcular SPI= Dividir EV por el PV. </text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+  </question>
+  <question type="cloze">
+    <name>
+      <text>Datos básicos 3</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p>Suponga un proyecto en el que en el momento actual y de acuerdo al plan de proyecto<b><u> las actividades desde la A hasta la E</u></b> deberían estar ya completadas y el resto de actividades no comenzadas.</p>
+        <p>El informe de seguimiento del proyecto es el siguiente:</p>
+        <table border="0" cellpadding="0" cellspacing="0" width="320" style="text-align: center; ">
+            <colgroup><col width="80" span="4"></colgroup>
+            <tbody>
+                <tr height="19">
+                    <td height="19" width="80"><b>Tareas</b></td>
+                    <td width="80"><b>CPTP</b></td>
+                    <td width="80"><b>CRTR</b></td>
+                    <td width="80"><b>%Completado</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>A</b></td>
+                    <td align="right" style="text-align: center; "><b>5000</b></td>
+                    <td align="right" style="text-align: center; "><b>6200</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>B</b></td>
+                    <td align="right" style="text-align: center; "><b>4300</b></td>
+                    <td align="right" style="text-align: center; "><b>5900</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>C</b></td>
+                    <td align="right" style="text-align: center; "><b>1000</b></td>
+                    <td align="right" style="text-align: center; "><b>1500</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>D</b></td>
+                    <td align="right" style="text-align: center; "><b>6700</b></td>
+                    <td align="right" style="text-align: center; "><b>4100</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>E</b></td>
+                    <td align="right" style="text-align: center; "><b>2600</b></td>
+                    <td align="right" style="text-align: center; "><b>7800</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19">F</td>
+                    <td align="right" style="text-align: center; ">3800</td>
+                    <td align="right" style="text-align: center; ">6600</td>
+                    <td align="right" style="text-align: center; ">80%</td>
+                </tr>
+                    <tr height="19">
+                        <td height="19">G</td>
+                        <td align="right" style="text-align: center; ">2800</td>
+                        <td align="right" style="text-align: center; "></td>
+                        <td align="right" style="text-align: center; "></td>
+                    </tr>
+                    <tr height="19">
+                        <td height="19">H</td>
+                        <td align="right" style="text-align: center; ">4500</td>
+                        <td align="right" style="text-align: center; "></td>
+                        <td align="right" style="text-align: center; "></td>
+                    </tr>
+            </tbody></table><br>Calcule:
+            <p>El valor planificado (PV) en el momento actual {1:NUMERICAL:%100%19600:0#}</p>
+            <p>El coste actual (AC) en el momento actual {1:NUMERICAL:%100%32100:0#}</p>
+            <p>El valor ganado (EV) en el momento actual {1:NUMERICAL:%100%22640.0:0#}</p>
+            <p>El CPI del proyecto (con dos decimales) {1:NUMERICAL:%100%0.71:0.01#22640.0/32100}</p>
+            <p>El SPI del proyecto (con dos decimales) {1:NUMERICAL:%100%1.16:0.01#22640.0/19600}</p><br><p></p>
+            ]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text>Para calcular PV= Sumar el CPTP de todas las tareas completadas. &lt;br&gt;Para calcular AC= Sumar todos los CRTR.&lt;br&gt;Para calcular EV= Multiplicar los CPTP por sus respectivos porcentajes y sumarlos.&lt;br&gt;Para calcular CPI= Dividir EV por el AC.&lt;br&gt;Para calcular SPI= Dividir EV por el PV. </text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+  </question>
+  <question type="cloze">
+    <name>
+      <text>Datos básicos 4</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p>Suponga un proyecto en el que en el momento actual y de acuerdo al plan de proyecto<b><u> las actividades desde la A hasta la E</u></b> deberían estar ya completadas y el resto de actividades no comenzadas.</p>
+        <p>El informe de seguimiento del proyecto es el siguiente:</p>
+        <table border="0" cellpadding="0" cellspacing="0" width="320" style="text-align: center; ">
+            <colgroup><col width="80" span="4"></colgroup>
+            <tbody>
+                <tr height="19">
+                    <td height="19" width="80"><b>Tareas</b></td>
+                    <td width="80"><b>CPTP</b></td>
+                    <td width="80"><b>CRTR</b></td>
+                    <td width="80"><b>%Completado</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>A</b></td>
+                    <td align="right" style="text-align: center; "><b>6900</b></td>
+                    <td align="right" style="text-align: center; "><b>3700</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>B</b></td>
+                    <td align="right" style="text-align: center; "><b>3400</b></td>
+                    <td align="right" style="text-align: center; "><b>5300</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>C</b></td>
+                    <td align="right" style="text-align: center; "><b>7200</b></td>
+                    <td align="right" style="text-align: center; "><b>1900</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>D</b></td>
+                    <td align="right" style="text-align: center; "><b>2900</b></td>
+                    <td align="right" style="text-align: center; "><b>6800</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>E</b></td>
+                    <td align="right" style="text-align: center; "><b>1800</b></td>
+                    <td align="right" style="text-align: center; "><b>3200</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19">F</td>
+                    <td align="right" style="text-align: center; ">4000</td>
+                    <td align="right" style="text-align: center; ">5200</td>
+                    <td align="right" style="text-align: center; ">80%</td>
+                </tr>
+                    <tr height="19">
+                        <td height="19">G</td>
+                        <td align="right" style="text-align: center; ">4600</td>
+                        <td align="right" style="text-align: center; "></td>
+                        <td align="right" style="text-align: center; "></td>
+                    </tr>
+            </tbody></table><br>Calcule:
+            <p>El valor planificado (PV) en el momento actual {1:NUMERICAL:%100%22200:0#}</p>
+            <p>El coste actual (AC) en el momento actual {1:NUMERICAL:%100%26100:0#}</p>
+            <p>El valor ganado (EV) en el momento actual {1:NUMERICAL:%100%25400.0:0#}</p>
+            <p>El CPI del proyecto (con dos decimales) {1:NUMERICAL:%100%0.97:0.01#25400.0/26100}</p>
+            <p>El SPI del proyecto (con dos decimales) {1:NUMERICAL:%100%1.14:0.01#25400.0/22200}</p><br><p></p>
+            ]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text>Para calcular PV= Sumar el CPTP de todas las tareas completadas. &lt;br&gt;Para calcular AC= Sumar todos los CRTR.&lt;br&gt;Para calcular EV= Multiplicar los CPTP por sus respectivos porcentajes y sumarlos.&lt;br&gt;Para calcular CPI= Dividir EV por el AC.&lt;br&gt;Para calcular SPI= Dividir EV por el PV. </text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+  </question>
+  <question type="cloze">
+    <name>
+      <text>Datos básicos 5</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p>Suponga un proyecto en el que en el momento actual y de acuerdo al plan de proyecto<b><u> las actividades desde la A hasta la E</u></b> deberían estar ya completadas y el resto de actividades no comenzadas.</p>
+        <p>El informe de seguimiento del proyecto es el siguiente:</p>
+        <table border="0" cellpadding="0" cellspacing="0" width="320" style="text-align: center; ">
+            <colgroup><col width="80" span="4"></colgroup>
+            <tbody>
+                <tr height="19">
+                    <td height="19" width="80"><b>Tareas</b></td>
+                    <td width="80"><b>CPTP</b></td>
+                    <td width="80"><b>CRTR</b></td>
+                    <td width="80"><b>%Completado</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>A</b></td>
+                    <td align="right" style="text-align: center; "><b>1600</b></td>
+                    <td align="right" style="text-align: center; "><b>4300</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>B</b></td>
+                    <td align="right" style="text-align: center; "><b>7700</b></td>
+                    <td align="right" style="text-align: center; "><b>5000</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>C</b></td>
+                    <td align="right" style="text-align: center; "><b>7300</b></td>
+                    <td align="right" style="text-align: center; "><b>2600</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>D</b></td>
+                    <td align="right" style="text-align: center; "><b>4200</b></td>
+                    <td align="right" style="text-align: center; "><b>3200</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>E</b></td>
+                    <td align="right" style="text-align: center; "><b>8000</b></td>
+                    <td align="right" style="text-align: center; "><b>5400</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19">F</td>
+                    <td align="right" style="text-align: center; ">3500</td>
+                    <td align="right" style="text-align: center; ">5400</td>
+                    <td align="right" style="text-align: center; ">20%</td>
+                </tr>
+                    <tr height="19">
+                        <td height="19">G</td>
+                        <td align="right" style="text-align: center; ">3000</td>
+                        <td align="right" style="text-align: center; "></td>
+                        <td align="right" style="text-align: center; "></td>
+                    </tr>
+            </tbody></table><br>Calcule:
+            <p>El valor planificado (PV) en el momento actual {1:NUMERICAL:%100%28800:0#}</p>
+            <p>El coste actual (AC) en el momento actual {1:NUMERICAL:%100%25900:0#}</p>
+            <p>El valor ganado (EV) en el momento actual {1:NUMERICAL:%100%29500.0:0#}</p>
+            <p>El CPI del proyecto (con dos decimales) {1:NUMERICAL:%100%1.14:0.01#29500.0/25900}</p>
+            <p>El SPI del proyecto (con dos decimales) {1:NUMERICAL:%100%1.02:0.01#29500.0/28800}</p><br><p></p>
+            ]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text>Para calcular PV= Sumar el CPTP de todas las tareas completadas. &lt;br&gt;Para calcular AC= Sumar todos los CRTR.&lt;br&gt;Para calcular EV= Multiplicar los CPTP por sus respectivos porcentajes y sumarlos.&lt;br&gt;Para calcular CPI= Dividir EV por el AC.&lt;br&gt;Para calcular SPI= Dividir EV por el PV. </text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+  </question>
+  <question type="cloze">
+    <name>
+      <text>Datos básicos 6</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p>Suponga un proyecto en el que en el momento actual y de acuerdo al plan de proyecto<b><u> las actividades desde la A hasta la E</u></b> deberían estar ya completadas y el resto de actividades no comenzadas.</p>
+        <p>El informe de seguimiento del proyecto es el siguiente:</p>
+        <table border="0" cellpadding="0" cellspacing="0" width="320" style="text-align: center; ">
+            <colgroup><col width="80" span="4"></colgroup>
+            <tbody>
+                <tr height="19">
+                    <td height="19" width="80"><b>Tareas</b></td>
+                    <td width="80"><b>CPTP</b></td>
+                    <td width="80"><b>CRTR</b></td>
+                    <td width="80"><b>%Completado</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>A</b></td>
+                    <td align="right" style="text-align: center; "><b>1100</b></td>
+                    <td align="right" style="text-align: center; "><b>7100</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>B</b></td>
+                    <td align="right" style="text-align: center; "><b>1700</b></td>
+                    <td align="right" style="text-align: center; "><b>4000</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>C</b></td>
+                    <td align="right" style="text-align: center; "><b>2800</b></td>
+                    <td align="right" style="text-align: center; "><b>4600</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>D</b></td>
+                    <td align="right" style="text-align: center; "><b>6800</b></td>
+                    <td align="right" style="text-align: center; "><b>3000</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19"><b>E</b></td>
+                    <td align="right" style="text-align: center; "><b>2800</b></td>
+                    <td align="right" style="text-align: center; "><b>7600</b></td>
+                    <td align="right" style="text-align: center; "><b>100%</b></td>
+                </tr>
+                <tr height="19">
+                    <td height="19">F</td>
+                    <td align="right" style="text-align: center; ">6200</td>
+                    <td align="right" style="text-align: center; ">7500</td>
+                    <td align="right" style="text-align: center; ">20%</td>
+                </tr>
+                    <tr height="19">
+                        <td height="19">G</td>
+                        <td align="right" style="text-align: center; ">3100</td>
+                        <td align="right" style="text-align: center; "></td>
+                        <td align="right" style="text-align: center; "></td>
+                    </tr>
+            </tbody></table><br>Calcule:
+            <p>El valor planificado (PV) en el momento actual {1:NUMERICAL:%100%15200:0#}</p>
+            <p>El coste actual (AC) en el momento actual {1:NUMERICAL:%100%33800:0#}</p>
+            <p>El valor ganado (EV) en el momento actual {1:NUMERICAL:%100%16440.0:0#}</p>
+            <p>El CPI del proyecto (con dos decimales) {1:NUMERICAL:%100%0.49:0.01#16440.0/33800}</p>
+            <p>El SPI del proyecto (con dos decimales) {1:NUMERICAL:%100%1.08:0.01#16440.0/15200}</p><br><p></p>
+            ]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text>Para calcular PV= Sumar el CPTP de todas las tareas completadas. &lt;br&gt;Para calcular AC= Sumar todos los CRTR.&lt;br&gt;Para calcular EV= Multiplicar los CPTP por sus respectivos porcentajes y sumarlos.&lt;br&gt;Para calcular CPI= Dividir EV por el AC.&lt;br&gt;Para calcular SPI= Dividir EV por el PV. </text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber/>
+  </question>
+</quiz>
